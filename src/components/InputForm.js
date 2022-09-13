@@ -4,12 +4,15 @@ import TableForm from './TableForm';
 
 const InputForm = () => {
     const [form] = Form.useForm();
-    const [data, setData] = useState([])
+    const [data, setData] = useState(JSON.parse(localStorage.getItem('users')) || [])
 
     const onFinish = (values) => {
         values.key = data.length + 1
         values.age = parseInt(values.age)
         setData([...data, values])
+        let localData = JSON.parse(localStorage.getItem('users')) || [];
+        localData.push(values);
+        localStorage.setItem('users', JSON.stringify(localData));
         form.resetFields();
     };
 

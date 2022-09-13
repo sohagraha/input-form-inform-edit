@@ -3,7 +3,7 @@ import React from 'react';
 
 const TableForm = ({ data, setData }) => {
     const sumAge = data.reduce((acc, curr) => {
-        return parseInt(acc) + parseInt(curr.age)
+        return parseInt(acc) + parseInt(curr.age) || 0
     }, 0)
 
     const columns = [
@@ -18,6 +18,7 @@ const TableForm = ({ data, setData }) => {
             key: 'age',
             render: (_, record) => (
                 <Input
+                    min={0}
                     onChange={e => {
                         const _data = [...data]
                         const value = e.target.value
