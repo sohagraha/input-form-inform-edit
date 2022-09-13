@@ -71,7 +71,7 @@ const InputForm = () => {
                         },
                     ]}
                 >
-                    <InputNumber />
+                    <InputNumber min={0}/>
                 </Form.Item>
 
                 <Form.Item
