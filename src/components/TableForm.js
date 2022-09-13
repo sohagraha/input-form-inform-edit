@@ -1,5 +1,6 @@
-import { Input, Space, Table } from 'antd';
+import { Input, Table } from 'antd';
 import React from 'react';
+import 'antd/dist/antd.css'
 
 const TableForm = ({ data, setData }) => {
     const sumAge = data.reduce((acc, curr) => {

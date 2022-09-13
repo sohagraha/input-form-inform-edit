@@ -1,6 +1,7 @@
 import { Button, Form, Input, InputNumber } from 'antd';
 import React, { useState } from 'react';
 import TableForm from './TableForm';
+import 'antd/dist/antd.css'
 
 const InputForm = () => {
     const [form] = Form.useForm();
