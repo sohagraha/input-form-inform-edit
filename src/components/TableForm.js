@@ -3,8 +3,12 @@ import React from 'react';
 
 const TableForm = ({ data, setData }) => {
     const sumAge = data.reduce((acc, curr) => {
-        return parseInt(acc) + parseInt(curr.age) || 0
+        return parseInt(acc) + (parseInt(curr.age) || 0)
     }, 0)
+
+    const handleLocal = (localNew) => {
+        localStorage.setItem('users', JSON.stringify(localNew))
+    }
 
     const columns = [
         {
@@ -25,7 +29,7 @@ const TableForm = ({ data, setData }) => {
                         const index = _data.findIndex(item => item.key === record.key)
                         _data[index].age = value
                         setData(_data)
-                        console.log(data);
+                        handleLocal(_data)
                     }}
                     value={record.age} />
             ),
@@ -40,7 +44,10 @@ const TableForm = ({ data, setData }) => {
 
     return (
         <>
-            <Table dataSource={data} columns={columns} footer={() => `Total Age : ${sumAge}`} />;
+            <Table dataSource={data} columns={columns} footer={() => <span style={{
+                color: 'red',
+                fontWeight: 'bolder'
+            }}>{`Total Age : ${sumAge}`}</span>} />;
         </>
     );
 };

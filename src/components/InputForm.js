@@ -7,12 +7,22 @@ const InputForm = () => {
     const [data, setData] = useState(JSON.parse(localStorage.getItem('users')) || [])
 
     const onFinish = (values) => {
-        values.key = data.length + 1
-        values.age = parseInt(values.age)
-        setData([...data, values])
-        let localData = JSON.parse(localStorage.getItem('users')) || [];
-        localData.push(values);
-        localStorage.setItem('users', JSON.stringify(localData));
+        if (data.length === 0) {
+            values.key = 1;
+            values.age = parseInt(values.age)
+            setData([...data, values])
+            data.push(values);
+            localStorage.setItem('users', JSON.stringify(data));
+
+        }
+        else {
+            values.key = Math.max.apply(Math, data.map((item) => item.key)) + 1;
+            values.age = parseInt(values.age)
+            setData([...data, values])
+            let localData = JSON.parse(localStorage.getItem('users')) || [];
+            localData.push(values);
+            localStorage.setItem('users', JSON.stringify(localData));
+        }
         form.resetFields();
     };
 
@@ -22,7 +32,7 @@ const InputForm = () => {
     return (
         <>
             <Form form={form}
-                style={{ width: '50%', margin: 'auto' }}
+                style={{ width: '50%', margin: 'auto', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5 }}
                 labelCol={{
                     span: 24,
                 }}
@@ -82,7 +92,9 @@ const InputForm = () => {
                         span: 24,
                     }}
                 >
-                    <Button type="primary" htmlType="submit">
+                    <Button style={{
+                        marginTop: '38px'
+                    }} type="primary" htmlType="submit">
                         Submit
                     </Button>
                 </Form.Item>
